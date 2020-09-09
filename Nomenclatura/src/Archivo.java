@@ -8,13 +8,20 @@ public class Archivo{
     		//Directorio del cliente, en al cual estan los archivos PDF en distintas carpetas
     		File diradquirirArchivos = new File("C:\\nomenclatura\\Origen");
     		//Directorio en el cual se dejarán los documentos PDF
-    		File dirOrigen = new File ("C:\\nomenclatura\\Transicion");
+    		File dirOrigen = new File ("C:\\a");
     		//Directorio de destino
-    		File dirDestino = new File ("C:\\nomenclatura\\Destino");
+    		File dirDestino = new File ("C:\\b");
     		
-    		adquirirArchivos(diradquirirArchivos, dirOrigen);
-    		moverAFecha(dirOrigen,dirDestino);
-    		cambiarNombre(dirDestino);
+    		
+    		//Metodos
+    		//adquirirArchivos(diradquirirArchivos, dirOrigen);
+    		//moverAFecha(dirOrigen,dirDestino);
+    		//cambiarNombre(dirDestino);
+    		
+    		
+    		XmlGenerado xg = new XmlGenerado();
+    		xg.moverAFecha(dirOrigen, dirDestino);
+    		//
 
     	
     }
@@ -139,4 +146,41 @@ public class Archivo{
             e.printStackTrace();
         }
     }
+    
+    
+    public static void moverAFechaXmlGenerado(File dirOrigen, File dirDestino) {
+    	File[] files = dirOrigen.listFiles();
+    	File directorioDestino = dirDestino;
+//    		DTEPlus_v2_0_1476935_1_tipo_52__FolD_108119__0014.xml
+    	for (File file : files) {
+    		
+    		String nombre = file.getName();
+    		String[] parts = nombre.split("_");
+    		String date =parts[0];
+    		String[] dateArray = date.split("-");
+    		System.out.println("Fecha del documento" + date);
+    		String anho = dateArray[0];
+    		System.out.println("año: "+anho);
+    		String mes = dateArray[1];
+    		System.out.println("mes: "+mes);
+    		String dia = dateArray[2];
+    		System.out.println("dia: "+dia);
+        	File fileDestinoAnho = new File(directorioDestino,anho);
+        	File fileDestinoMes = new File(fileDestinoAnho,mes);
+        	File fileDestinoDia = new File(fileDestinoMes,dia);
+
+       		if(!fileDestinoAnho.exists()) fileDestinoAnho.mkdirs();
+        	if(!fileDestinoMes.exists()) fileDestinoMes.mkdirs();
+        	if(!fileDestinoDia.exists()) fileDestinoDia.mkdirs();
+        	
+    		File archivoAMover = new File(fileDestinoDia+"\\"+nombre);
+    		boolean estadoMovimiento =  file.renameTo(archivoAMover);
+           	if (estadoMovimiento) System.out.println("Documento movido correctamente: "+ file.getName());
+           	else System.out.println("Error al mover: " + file.getName());
+           	}
+    	System.out.println("FIN");
+    }
+    
+    
+    
 }
