@@ -13,15 +13,15 @@ public class Archivo{
     		File dirDestino = new File ("C:\\b");
     		
     		
-    		//Metodos
+    		//Metodos renombrar XML impresión y PDF - SE UTILIZAN LOS TRES PARAMETROS AL INICIO
     		//adquirirArchivos(diradquirirArchivos, dirOrigen);
     		//moverAFecha(dirOrigen,dirDestino);
     		//cambiarNombre(dirDestino);
     		
-    		
+    		//metodo para renombrar XMLGenerado - SE UTILIZAN SOLO LOS PARAMETROS AL INICIO dirOrigen y dirDestino
     		XmlGenerado xg = new XmlGenerado();
     		xg.moverAFecha(dirOrigen, dirDestino);
-    		//
+    		
 
     	
     }
