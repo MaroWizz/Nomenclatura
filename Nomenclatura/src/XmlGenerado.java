@@ -33,7 +33,7 @@ public class XmlGenerado {
 			  Document doc = dBuilder.parse(archivo);
 			  
 			  NodeList nList = doc.getElementsByTagName("IdDoc");
-			  System.out.println("pruebas: " + nList.getLength());
+			  NodeList nRut = doc.getElementsByTagName("Emisor");
 			  
 			  
 			  for(int temp = 0; temp < nList.getLength(); temp++) {
@@ -42,19 +42,30 @@ public class XmlGenerado {
 				  if(nNode.getNodeType() == Node.ELEMENT_NODE) {
 				    Element eElement = (Element) nNode;
 
-				    //Asignar valor del TAGA
-				    int tipo = Integer.parseInt(eElement.getElementsByTagName("TipoDTE").item(0).getTextContent());
-				    int folio = Integer.parseInt(eElement.getElementsByTagName("Folio").item(0).getTextContent());
-				    String date = eElement.getElementsByTagName("FchEmis").item(0).getTextContent();
-				    int rut = 123;
 				    
-				    System.out.println("Tipo: "+ tipo);
-				    System.out.println("Folio: "+ folio);
-				    System.out.println("Fecha: "+ date);
-				    System.out.println("Rut: "+rut);
-				    nombre = date+"_"+rut+"_"+folio+"_"+tipo+".xml";
-				    System.out.println(nombre);
-				    return nombre;
+				    
+				    for(int temprut = 0; temprut < nRut.getLength(); temprut++) {
+				    	Node nNodeRut = nRut.item(temprut);
+				    	if(nNodeRut.getNodeType() == Node.ELEMENT_NODE) {
+						    Element eElementRut = (Element) nNodeRut;
+						    
+						  //Asignar valor del TAG
+						    int tipo = Integer.parseInt(eElement.getElementsByTagName("TipoDTE").item(0).getTextContent());
+						    int folio = Integer.parseInt(eElement.getElementsByTagName("Folio").item(0).getTextContent());
+						    String date = eElement.getElementsByTagName("FchEmis").item(0).getTextContent();
+						    String rut = eElementRut.getElementsByTagName("RUTEmisor").item(0).getTextContent();
+						    
+						    System.out.println("Tipo: "+ tipo);
+						    System.out.println("Folio: "+ folio);
+						    System.out.println("Fecha: "+ date);
+						    System.out.println("Rut: "+rut);
+						    nombre = date+"_"+rut+"_"+folio+"_"+tipo+".xml";
+						    System.out.println(nombre);
+						    return nombre;
+				    	}
+				    }
+
+				   
 				  }
 				}
 			  
@@ -74,7 +85,7 @@ public class XmlGenerado {
 			  Document doc = dBuilder.parse(archivo);
 			  
 			  NodeList nList = doc.getElementsByTagName("IdDoc");
-			  System.out.println("pruebas: " + nList.getLength());
+NodeList nRut = doc.getElementsByTagName("Emisor");
 			  
 			  
 			  for(int temp = 0; temp < nList.getLength(); temp++) {
@@ -83,19 +94,30 @@ public class XmlGenerado {
 				  if(nNode.getNodeType() == Node.ELEMENT_NODE) {
 				    Element eElement = (Element) nNode;
 
-				    //Asignar valor del TAGA
-				    int tipo = Integer.parseInt(eElement.getElementsByTagName("TipoDTE").item(0).getTextContent());
-				    int folio = Integer.parseInt(eElement.getElementsByTagName("Folio").item(0).getTextContent());
-				    String date = eElement.getElementsByTagName("FchEmis").item(0).getTextContent();
-				    int rut = 123;
 				    
-				    System.out.println("Tipo: "+ tipo);
-				    System.out.println("Folio: "+ folio);
-				    System.out.println("Fecha: "+ date);
-				    System.out.println("Rut: "+rut);
-				    nombre = rut+"_"+folio+"_"+tipo+".xml";
-				    System.out.println(nombre);
-				    return nombre;
+				    
+				    for(int temprut = 0; temprut < nRut.getLength(); temprut++) {
+				    	Node nNodeRut = nRut.item(temprut);
+				    	if(nNodeRut.getNodeType() == Node.ELEMENT_NODE) {
+						    Element eElementRut = (Element) nNodeRut;
+						    
+						  //Asignar valor del TAG
+						    int tipo = Integer.parseInt(eElement.getElementsByTagName("TipoDTE").item(0).getTextContent());
+						    int folio = Integer.parseInt(eElement.getElementsByTagName("Folio").item(0).getTextContent());
+						    String date = eElement.getElementsByTagName("FchEmis").item(0).getTextContent();
+						    String rut = eElementRut.getElementsByTagName("RUTEmisor").item(0).getTextContent();
+						    
+						    System.out.println("Tipo: "+ tipo);
+						    System.out.println("Folio: "+ folio);
+						    System.out.println("Fecha: "+ date);
+						    System.out.println("Rut: "+rut);
+						    nombre = rut.substring(0,8)+"_"+folio+"_"+tipo+".xml";
+						    System.out.println(nombre);
+						    return nombre;
+				    	}
+				    }
+
+				   
 				  }
 				}
 			  
